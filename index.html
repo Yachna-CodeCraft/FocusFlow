@@ -1,88 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FocusFlow</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow - Productivity Dashboard</title>
+  <!-- styles -->
+  <link rel="stylesheet" href="style.css">
+  <!-- fullcalendar -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 </head>
 <body>
 
-  <!-- ✅ Navbar -->
+  <!-- main navigation -->
   <nav class="navbar">
-    <div class="navbar-container">
-      <div class="navbar-logo">🌟 FocusFlow</div>
-      <div class="navbar-user">Welcome, Yachna</div>
+    <div class="nav-left">FocusFlow</div>
+    <div class="nav-right">
+      <p>Hello <span id="username2">Guest</span></p>
     </div>
   </nav>
 
-  <!-- ✅ Main content container -->
-  <div class="main-container">
+  <div class="container">
 
-    <!-- ✅ Row 1: Box1 (Welcome) + Box2 (Add Plan) -->
-    <div class="row">
-      <div class="box box1">
-        <h2>👋 Welcome</h2>
-        <p>Stay focused.</p>
-        <p>You have <span id="task-count">0</span> tasks today - <span id="completed-count">0</span> completed.</p>
-        <div class="progress-row">
-          <span class="progress-label">In Progress</span>
-          <div id="welcome-status">
-            <div class="bar" id="progress-bar"></div>
-          </div>
+    <!-- welcome panel -->
+    <div class="panel welcome">
+      <h2>Welcome <span id="username">Guest</span></h2>
+      <p class="welcome-subtitle">Stay focused.</p>
+      <p class="welcome-task-summary">
+        You have <span id="task-count">0</span> tasks today - 
+        <span id="completed-count">0</span> completed.
+      </p>
+      <div class="progress-row">
+        <span class="progress-label">In Progress</span>
+        <div id="welcome-status">
+          <div class="bar" id="progress-bar"></div>
         </div>
       </div>
+    </div>
 
-      <div class="box box2">
-        <h2>➕ Add Plan</h2>
-        <form id="planForm">
-          <input type="text" id="title" placeholder="Plan Title" required />
-          <input type="date" id="date" required />
-          <button type="submit">Add Plan</button>
-        </form>
+    <!-- to-do list -->
+    <div class="panel todo">
+      <h2>To-Do List</h2>
+      <form id="add-task-form">
+        <input id="todo-input" type="text" placeholder="Add new task..." required>
+        <button type="submit">Add Task</button>
+      </form>
+      <ul id="todo-list"></ul>
+    </div>
+
+    <!-- calendar -->
+    <div class="panel calendar">
+      <h2>Calendar</h2>
+      <div id="calendar-placeholder"></div>
+    </div>
+
+    <!-- pomodoro timer -->
+    <div class="panel timer">
+      <h2>Pomodoro Timer</h2>
+      <div id="timer">25:00</div>
+      <div class="timer-buttons">
+        <button id="start-timer">Start</button>
+        <button id="pause-timer">Pause</button>
+        <button id="reset-timer">Reset</button>
       </div>
     </div>
 
-    <!-- ✅ Row 2: Box3 (To-do), Box4 (Calendar), Box5 (Pomodoro) -->
-    <div class="row">
-      <div class="box box3">
-        <h2>📝 To-Do List</h2>
-        <input type="text" id="todoInput" placeholder="New Task" />
-        <button onclick="addTodo()">Add</button>
-        <ul id="todoList"></ul>
-      </div>
-
-      <div class="box">
-  <h2>📅 Calendar & 🗂️ Plans</h2>
-  <div class="calendar-plan-container">
-    <div id="calendar"></div>
-
-    <div class="plan-list">
-      <h3>📋 Your Plans</h3>
-      <ul id="planList">
-        <!-- Example plan items -->
-        <li>Plan 1</li>
-        <li>Plan 2</li>
-        <!-- Add more dynamically -->
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-
-      <div class="box box5">
-        <h2>⏱️ Pomodoro Timer</h2>
-        <div id="timer">25:00</div>
-        <button onclick="startPomodoro()">Start</button>
-        <button onclick="resetPomodoro()">Reset</button>
-      </div>
+    <!-- add plan form -->
+    <div class="panel add-plan">
+      <h2>Add Plan</h2>
+      <form id="add-plan-form">
+        <input type="text" id="plan-title" placeholder="Plan title" required>
+        <input type="date" id="plan-date" required>
+        <textarea id="plan-desc" placeholder="Plan description..."></textarea>
+        <button type="submit">Add Plan</button>
+      </form>
     </div>
 
   </div>
 
+  <!-- event modal -->
+  <div id="event-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h3 id="modal-title">Event Title</h3>
+      <p id="modal-date" class="small-date"></p>
+      <p id="modal-description">Event description...</p>
+      <button id="modal-close-btn">Close</button>
+    </div>
+  </div>
+
+  <!-- name entry modal -->
+  <div id="name-modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Welcome to FocusFlow</h3>
+      <p class="modal-text">Please enter your name to begin.</p>
+      <input type="text" id="name-input" placeholder="Your Name...">
+      <button id="save-name-btn">Continue</button>
+    </div>
+  </div>
+
+  <!-- scripts -->
   <script src="script.js"></script>
 </body>
 </html>
